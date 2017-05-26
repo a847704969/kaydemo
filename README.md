@@ -1,10 +1,14 @@
 # kaydemo
 这是一个小小的webpack例子。记录一下。
+
 首先你要稍微懂一些node.js的知识。
+
 当下最热门的前端资源模块化管理和打包工具,它能把各种资源，包括 jxs、coffeeJS、less／sass，甚至图片，当作模块来加载和使用。同样它需要一个 webpack.config.js 的配置文件，有专门针对于 css、js 和图片等插件，在 js 中直接通过 require 来使用模块，很方便。
+
 webpack 可以将文件模块按照依赖打包成方便使用的前端资源，还可以将按需加载的模块进行异步加载。
 
 怎么安装Webpack。
+
 1安装node.js
 
 首先需要安装 Node.js ，node自带了包管理工具 npm 。
@@ -39,7 +43,7 @@ webapck --display-error-details 显示更多报错信息
 2、每个项目下都必须配置有一个 webpack.config.js ，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么。
 
 下面看一个简单的示例：
-
+'''javascript
 var webpack = require('webpack');
 
 module.exports = {
@@ -82,6 +86,8 @@ module.exports = {
         }
     }
 };
+
+'''
 entry
 
 entry 是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。
