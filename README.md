@@ -43,7 +43,8 @@ webapck --display-error-details 显示更多报错信息
 2、每个项目下都必须配置有一个 webpack.config.js ，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么。
 
 下面看一个简单的示例：
-'''javascript
+<script type="text/javascript">
+
 var webpack = require('webpack');
 
 module.exports = {
@@ -87,7 +88,7 @@ module.exports = {
     }
 };
 
-'''
+</script>
 entry
 
 entry 是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。
