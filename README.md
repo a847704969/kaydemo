@@ -27,26 +27,27 @@ webpack 可以将文件模块按照依赖打包成方便使用的前端资源，
 或者通过 npm install webpack@1.2.x --save-dev 安装指定版本的 webpack 到 package.json 文件中。
 通过 npm install webpack-dev-server --save-dev 安装 dev tools 到 package.json 文件中，本地运行webpack服务。
 
-怎么使用Webpack
---------------
-1、安装 webpack 后，可以使用 webpack 这个命令行工具。主要命令： webpack <entry> <output> 。可以切换到包含webpack.config.js的目录运行命令：
-------------------------------------------------------------------------------------------------------------------------------------
-webpack 执行一次开发时的编译
-webpack -p 执行一次生成环境的编译（压缩）
-webpack --watch 在开发时持续监控增量编译（很快）
-webpack -d 让他生成SourceMaps
-webpack --progress 显示编译进度
-webpack --colors 显示静态资源的颜色
+##怎么使用Webpack
+
+###1、安装 webpack 后，可以使用 webpack 这个命令行工具。主要命令： webpack <entry> <output> 。可以切换到包含webpack.config.js的目录运行命令：
+
+#####webpack 执行一次开发时的编译
+#####webpack -p 执行一次生成环境的编译（压缩）
+#####webpack --watch 在开发时持续监控增量编译（很快）
+#####webpack -d 让他生成SourceMaps
+#####webpack --progress 显示编译进度
+#####webpack --colors 显示静态资源的颜色
 
 
-webpack --sort-modules-by, --sort-chunks-by, --sort-assets-by 将modules/chunks/assets进行列表排序
-webpack --display-chunks 展示编译后的分块
-webpack --display-reasons 显示更多引用模块原因
-webapck --display-error-details 显示更多报错信息
-2、每个项目下都必须配置有一个 webpack.config.js ，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么。
-----------------------------------------------------------------------------------------------------------------------------------
-下面看一个简单的示例：
-===================
+#####webpack --sort-modules-by, --sort-chunks-by, --sort-assets-by 将modules/chunks/assets进行列表排序
+#####webpack --display-chunks 展示编译后的分块
+#####webpack --display-reasons 显示更多引用模块原因
+#####webapck --display-error-details 显示更多报错信息
+
+###2、每个项目下都必须配置有一个 webpack.config.js ，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么。
+
+##下面看一个简单的示例：
+
 ```javascript
 
 var webpack = require('webpack');
@@ -110,7 +111,7 @@ output 是对应输出项配置,主要包括 path , filename 和 publishPath 属
 module.loaders
 
 module.loaders 是最关键的一块配置。它告知 webpack 每一种文件都需要使用什么加载器来处理。 点击这里可以查看loader list 。
-
+```javascript
 module: {
     //加载器配置
     loaders: [
@@ -122,19 +123,20 @@ module: {
         { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}
     ]
 }
+```
 loader主要有3种使用方式：
 
 1、在页面里面引用资源使用
-
+```javascript
 require("url-loader?mimetype=image/png!./file.png");
-
+```
 2、在webpack.config.js文件夹中使用
-
+```javascript
 { test: /.png$/, loader: "url?mimetype=image/png" };
-
+```
 3、在命令行中编译使用
 
-webpack --module-bind "png=url-loader?mimetype=image/png";
+#####webpack --module-bind "png=url-loader?mimetype=image/png";
 
 如上，"-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
 
@@ -142,14 +144,14 @@ webpack --module-bind "png=url-loader?mimetype=image/png";
 
 拿最后一个 url-loader 来说，它会将样式中引用到的图片转为模块来处理，使用该加载器需要先进行安装：
 
-npm install url-loader -save-dev
+#####npm install url-loader -save-dev
 
 配置信息的参数“?limit=8192”表示将所有小于8kb的图片都转为base64形式（其实应该说超过8kb的才使用 url-loader 来映射到文件，否则转为data url形式）。也可以使用file-loader来加载资源文件。
 
 plugins
 
 plugins 是插件项，这里我们使用了一个 CommonsChunkPlugin 的插件，它用于提取多个入口文件的公共脚本部分，然后生成一个 common.js 来方便多页面之间进行复用。 点击这里可以查看plugins list 。
-
+```javascript
 plugins: [
     //提公用js到common.js文件中
     new webpack.optimize.CommonsChunkPlugin('common.js'),
@@ -163,6 +165,7 @@ plugins: [
         $: "webpack-zepto"
     })
 ]
+```
 如上，包含两种：
 
 1、第一种webpack自带的一些插件： webpack.ProvidePlugin 、 webpack.optimize.CommonsChunkPlugin ，
@@ -172,7 +175,7 @@ plugins: [
 resolve
 
 最后是 resolve 配置，这块很好理解，直接写注释了：
-
+```javascript
 resolve: {
     // require时省略的扩展名，如：require('module') 不需要module.js
     extension: ['', '.js'],
@@ -181,6 +184,7 @@ resolve: {
         filter: path.join(__dirname, 'src/filters')
     }
 }
+```
 使用Webpack-dev-server
 
 webpack-dev-server 是基于node.js Express服务，它同时包含了一个基于 Socket.IO 轻量的运行时环境。
@@ -194,6 +198,7 @@ config.entry.unshift('webpack-dev-server/client?http://localhost:9090', "webpack
 config.plugins.push(new webpack.HotModuleReplacementPlugin());
 // 这里配置：请求http://localhost:9090/index.php，
 // 相当于通过本地node服务代理请求到了http://testapi.uhouzz.com/index.php
+```javascript
 var proxy = [{
     path: "/index.php/*",
     target: "http://pc.uhouzz.com",
@@ -207,12 +212,13 @@ var app = new WebpackDevServer(webpack(config), {
     proxy:proxy
 });
 app.listen(9090);
+```
 如上，引用 webpack 和 webpack-dev-server 模块，通过WebpackDevServer启动服务，通过 HotModuleReplacementPlugin 插件启动代码自动编译页面自动刷新。这样，当你修改了html、js或者样式文件，页面会自动编译刷新。
 
 html页面使用
 
 直接在页面引入 webpack 最终生成的页面脚本和样式文件即可。
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -227,8 +233,9 @@ html页面使用
     <script src="/dist/build.js"></script>
 </body>
 </html>
+```
 总结
 
 基于 webpack 的入门教程就到这里，希望本文能对你有所帮助，你也可以参考阮一峰的例子
-https://github.com/ruanyf/webpack-demos#demo01-entry-file-source 
+![https://github.com/ruanyf/webpack-demos#demo01-entry-file-source](大神日志)
 进行深入的了解。
