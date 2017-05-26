@@ -10,14 +10,17 @@ webpack 可以将文件模块按照依赖打包成方便使用的前端资源，
 怎么安装Webpack。
 
 1安装node.js
+=======
 
 首先需要安装 Node.js ，node自带了包管理工具 npm 。
 
 2安装webpack
+=========
 
 使用 npm install webpack -g ，webpack全局安装到了本地环境中，就可以使用 webpack 命令了。
 
 3在项目中使用webpack
+==============
 
 通过 npm init 实例化package.json文件。
 通过 npm install webpack --save-dev 安装 webpack 到 package.json 文件中。
@@ -25,9 +28,9 @@ webpack 可以将文件模块按照依赖打包成方便使用的前端资源，
 通过 npm install webpack-dev-server --save-dev 安装 dev tools 到 package.json 文件中，本地运行webpack服务。
 
 怎么使用Webpack
-
+--------------
 1、安装 webpack 后，可以使用 webpack 这个命令行工具。主要命令： webpack <entry> <output> 。可以切换到包含webpack.config.js的目录运行命令：
-
+------------------------------------------------------------------------------------------------------------------------------------
 webpack 执行一次开发时的编译
 webpack -p 执行一次生成环境的编译（压缩）
 webpack --watch 在开发时持续监控增量编译（很快）
@@ -41,9 +44,10 @@ webpack --display-chunks 展示编译后的分块
 webpack --display-reasons 显示更多引用模块原因
 webapck --display-error-details 显示更多报错信息
 2、每个项目下都必须配置有一个 webpack.config.js ，它的作用如同常规的 gulpfile.js/Gruntfile.js ，就是一个配置项，告诉 webpack 它需要做什么。
-
+----------------------------------------------------------------------------------------------------------------------------------
 下面看一个简单的示例：
-<script type="text/javascript">
+===================
+```javascript
 
 var webpack = require('webpack');
 
@@ -88,15 +92,17 @@ module.exports = {
     }
 };
 
-</script>
+```
 entry
 
 entry 是页面入口文件配置，可以是一个文件或者多个入口文件，可以是对象格式或者数组格式。
-
+```javascript
 entry: {
     index : './src/main.js'
 } 
 entry:['./src/main.js','./src/index.js']
+```
+
 output
 
 output 是对应输出项配置,主要包括 path , filename 和 publishPath 属性。 path 代表输出的路径， filename 代表输出的文件名称， publishPath 代表静态资源发布后的前缀地址。
