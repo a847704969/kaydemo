@@ -236,6 +236,7 @@ html页面使用
 ```
 总结
 
-基于 webpack 的入门教程就到这里，希望本文能对你有所帮助，你也可以参考阮一峰的例子
-![https://github.com/ruanyf/webpack-demos#demo01-entry-file-source]
+基于 webpack 的入门教程就到这里，希望本文能对你有所帮助，你也可以参考阮一峰的例子。
+链接：
+#### https://github.com/ruanyf/webpack-demos#demo01-entry-file-source
 进行深入的了解。
